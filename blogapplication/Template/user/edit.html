@@ -1,0 +1,81 @@
+{% extends 'user/user.html' %}
+{% block content %}
+{% load static %}
+
+
+<style>
+    .container {
+        margin-top: 40px;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-outline {
+        margin-bottom: 20px;
+    }
+
+    label {
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form method="post" action="{% url 'edit_Blog' id=datas.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-outline">
+                    <label class="form-label" for="carName">Title</label>
+                    <input type="text" name="Title" class="form-control" id="carName" value="{{ datas.Title }}" required>
+                </div>
+
+                <div class="form-outline">
+                    <label class="form-label" for="carModel">Description</label>
+                    <input type="text" name="Description" class="form-control" id="carModel" value="{{ datas.Description }}" required>
+                </div>
+
+               
+                <div class="form-outline">
+                    <label class="form-label" for="carImage">Image</label>
+                    <input class="form-control" type="file" name="image" id="carImage" value="{{ datas.image }}" required>
+                </div>
+
+                <input type="submit" class="btn btn-success" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
