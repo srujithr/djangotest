@@ -69,19 +69,40 @@ def add_blog(request):
         return render(request, 'user/add.html',{'user':user})
 
 
-def edit_Blog(request,id):
+# def edit_Blog(request,id):
+#     user = Bloguser.objects.get(id=request.user.id)
+#     print(user)
+#     datas = Blog.objects.get(id=id)
+#     print(datas)
+#     if request.method == 'POST':
+#         datas.Title = request.POST['Title']
+#         datas.Description = request.POST['Description']
+#     if request.FILES == 'image':
+#         datas.save()
+#         # datas = Blog.objects.update(image=image,Title=Title,Description=Description)
+#         return redirect(view_blog)
+#     else:
+#         return render(request, 'user/edit.html',{'datas':datas})
+    
+
+def edit_Blog(request, id):
     user = Bloguser.objects.get(id=request.user.id)
     print(user)
     datas = Blog.objects.get(id=id)
     print(datas)
+    
     if request.method == 'POST':
-        image = request.POST['image']
-        Title = request.POST['Title']
-        Description = request.POST['Description']
-        datas = Blog.objects.update(image=image,Title=Title,Description=Description)
+        datas.Title = request.POST['Title']
+        datas.Description = request.POST['Description']
+        
+        if 'image' in request.FILES:
+            datas.image = request.FILES['image']
+            
+        datas.save()
         return redirect(view_blog)
     else:
-        return render(request, 'user/edit.html',{'datas':datas})
+        return render(request, 'user/edit.html', {'datas': datas})
+
        
 
 def view_blog(request):
@@ -100,4 +121,16 @@ def delete(request,id):
 def Bloglist(request):
     user = Bloguser.objects.get(id=request.user.id)
     data = Blog.objects.all()
+    
     return render(request, 'user/Bloglist.html', {'data': data})
+
+
+def listsblog(request,id):
+    user = Bloguser.objects.get(id=request.user.id)
+    data = Blog.objects.filter(user_id=id)
+    return render(request, 'user/listblog.html', {'data': data})
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect(index)

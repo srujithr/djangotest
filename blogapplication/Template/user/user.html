@@ -69,10 +69,17 @@
                                     <a class="nav-link" href="aaa">Add Blog</a>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link" href="Bloglist">Blogs</a>
+                                    <a class="nav-link" href="{% url 'Bloglist' %}">Blogs</a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'listsblog' user.id %}">Blogslist</a>
                                  </li>
                                  <li class="nav-item">
                                     <a class="nav-link" href="{% url 'view_blog' %}">view Blog</a>
+
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">logout</a>
                                  </li>
                               </ul>
                            </div>
@@ -290,7 +297,7 @@
      
       <!-- end Testimonial -->
 
-   {% endblock %}
+
       <!-- contact -->
       <div id="contact" class="contact">
          <div class="container">
@@ -330,6 +337,7 @@
          </div>
       </div>
       <!-- end contact -->
+      {% endblock %}
       <!--  footer -->
       <footer>
          <div class="footer">

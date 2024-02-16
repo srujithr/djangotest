@@ -31,7 +31,9 @@ urlpatterns = [
     path('aaa',views.aaa),
     path('view_blog',views.view_blog, name='view_blog'),
     path('Bloglist',views.Bloglist,name='Bloglist'),
+    path('listsblog/<int:id>',views.listsblog,name='listsblog'),
     path('delete/<int:id>',views.delete, name="delete"),
+    path('logout',views.logout,name='logout'),
 ]
 if settings.DEBUG:
     urlpatterns +=static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
